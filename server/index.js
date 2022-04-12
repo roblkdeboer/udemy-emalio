@@ -1,33 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
-import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import './services/passport.js';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
-    },
-    (accessToken, refreshToken, profile, done) => {
-      console.log('access token', accessToken);
-      console.log('refresh token', refreshToken);
-      console.log('profile', profile);
-    }
-  )
-);
-
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email'],
-  })
-);
-
-app.get('/auth/google/callback', passport.authenticate('google'));
+app.use(authRoutes);
 
 // Check which port to use
 const PORT = process.env.PORT || 5000;
