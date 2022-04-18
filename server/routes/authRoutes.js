@@ -3,19 +3,21 @@ import express from 'express';
 
 const router = express.Router();
 
-const authLogin = router.get(
+router.get(
   '/auth/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
 
-const authCallback = router.get(
-  '/auth/google/callback',
-  passport.authenticate('google')
-);
+router.get('/auth/google/callback', passport.authenticate('google'));
 
-const currentUser = router.get('/api/check-current-user', (req, res) => {
+router.get('/api/logout', (req, res) => {
+  req.logout();
+  res.send(req.user);
+});
+
+router.get('/api/check-current-user', (req, res) => {
   res.send(req.user);
 });
 
