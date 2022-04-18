@@ -15,4 +15,8 @@ const authCallback = router.get(
   passport.authenticate('google')
 );
 
+const currentUser = router.get('/api/check-current-user', (req, res) => {
+  res.send(req.user);
+});
+
 export default router;
