@@ -9,4 +9,4 @@ Add the heroku remote repo
 git remote add heroku https://git.heroku.com/fast-woodland-41607.git
 '''
 
-git push heroku master
+git push subtree --prefix server heroku master
