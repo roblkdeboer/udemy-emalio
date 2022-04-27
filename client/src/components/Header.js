@@ -10,12 +10,8 @@ class Header extends Component {
     return (
       <>
         <nav>
-          <div class="nav-wrapper">
-            <a
-              href="/"
-              className="brand-logo"
-              style={{ 'margin-left': '1rem' }}
-            >
+          <div className="nav-wrapper">
+            <a href="/" className="brand-logo" style={{ marginLeft: '1rem' }}>
               Emalio
             </a>
             <a
