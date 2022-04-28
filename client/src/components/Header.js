@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { connect } from 'react-redux';
 
@@ -32,9 +33,13 @@ class Header extends Component {
       <>
         <nav>
           <div className="nav-wrapper">
-            <a href="/" className="brand-logo" style={{ marginLeft: '1rem' }}>
+            <Link
+              to={this.props.auth ? '/surveys' : '/'}
+              className="brand-logo"
+              style={{ marginLeft: '1rem' }}
+            >
               Emalio
-            </a>
+            </Link>
             <a
               href="/#"
               data-target="mobile-demo"
