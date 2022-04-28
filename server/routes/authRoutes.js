@@ -20,7 +20,7 @@ router.get(
 
 router.get('/api/logout', (req, res) => {
   req.logout();
-  res.send(req.user);
+  res.redirect('/');
 });
 
 router.get('/api/check-current-user', (req, res) => {
