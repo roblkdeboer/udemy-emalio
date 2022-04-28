@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import { connect } from 'react-redux';
 
 class Header extends Component {
   componentDidMount() {
     var elems = document.querySelectorAll('.sidenav');
     M.Sidenav.init(elems, { edge: 'right' });
   }
+
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <li>
+            <a href="/auth/google">Login With Google</a>
+          </li>
+        );
+      default:
+        return (
+          <li>
+            <a href="/api/logout">Logout</a>
+          </li>
+        );
+    }
+  }
+
   render() {
     return (
       <>
@@ -23,21 +44,21 @@ class Header extends Component {
             </a>
 
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li>
-                <a href="/">Login With Google</a>
-              </li>
+              {this.renderContent()}
             </ul>
           </div>
         </nav>
 
         <ul className="sidenav" id="mobile-demo">
-          <li>
-            <a href="/">Login With Google</a>
-          </li>
+          {this.renderContent()}
         </ul>
       </>
     );
   }
 }
 
-export default Header;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Header);
